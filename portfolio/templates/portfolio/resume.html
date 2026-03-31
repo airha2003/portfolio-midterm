@@ -1,0 +1,155 @@
+{% extends 'portfolio/base.html' %}
+{% load static %}
+
+{% block content %}
+<section id="resume" class="py-5" style="background: var(--bg-dark); min-height: 100vh; color: var(--white-pure);">
+    <div class="container mt-5">
+
+        <div class="text-center mb-5">
+            <h2 style="font-family: 'Playfair Display'; font-size: 30px; color: var(--pink-soft);">Resume</h2>
+            <div style="width: 80px; height: 3px; background: var(--purple-vibrant); margin: 10px auto;"></div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6" style="animation: fadeInUp 1s ease;">
+                <h3 class="resume-title">Summary</h3>
+                <div class="resume-item pb-0">
+                    <h4>Airha S. Obañana</h4>
+                    <p><em>Innovative and leadership-driven Computer Science student with a passion for Network Engineering and community service. Experienced in managing organizational finances and implementing youth-led initiatives.</em></p>
+                    <ul>
+                        <li>Kabulacan Sta. Catalina, Negros Oriental, 6220</li>
+                        <li>airhasienes2003@gmail.com</li>
+                        <li>09063036273</li>
+                    </ul>
+                </div>
+
+                <h3 class="resume-title mt-4">Education</h3>
+                <div class="resume-item">
+                    <h4>Bachelor of Science in Computer Science</h4>
+                    <h5>2022 - Present</h5>
+                    <p><em>Negros Oriental State University</em></p>
+                    <p>Focusing on <strong>Backend Web Development (Django)</strong> and <strong>Network Administration</strong>. Actively designing hybrid network topologies and visualization projects.</p>
+                </div>
+
+                <div class="resume-item">
+                    <h4>Senior High School - Humanities and Social Sciences Strand</h4>
+                    <h5>2020 - 2022</h5>
+                    <p><em>Sta. Catalina National High School</em></p>
+                    <p>Graduated with Honors. A class president.</p>
+                </div>
+
+                <div class="resume-item">
+                    <h4>Elementary Education</h4>
+                    <h5>Graduated 2016</h5>
+                    <p><em>Kabulacan Elementary School</em></p>
+                    <p>Graduated with Honors and a leadership award.</p>
+                </div>
+            </div>
+
+            <div class="col-lg-6" style="animation: fadeInUp 1.2s ease;">
+                <h3 class="resume-title">Leadership Experience</h3>
+
+                <div class="resume-item">
+                    <h4>Sangguniang Kabataan Councilor</h4>
+                    <h5>2023 - Present</h5>
+                    <p><em>Local Government Unit - Sta. Catalina Negros Oriental</em></p>
+                    <ul>
+                        <li>Leading community-based projects focused on youth empowerment and digital literacy.</li>
+                        <li>Collaborating with local officials to draft and implement local youth development plans.</li>
+                        <li>Advocating for transparent governance and active youth participation.</li>
+                    </ul>
+                </div>
+
+                <div class="resume-item">
+                    <h4>Youth League Org. Treasurer</h4>
+                    <h5>Present</h5>
+                    <p><em>Community Organization</em></p>
+                    <ul>
+                        <li>Overseeing all financial transactions, budgeting, and audits for organization-wide events.</li>
+                        <li>Ensuring fiscal responsibility and transparent reporting to the executive board.</li>
+                        <li>Assisting in the planning of technology-focused holiday booths and community events.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    /* Glowing Timeline Aesthetic */
+    .resume-title {
+        font-size: 26px;
+        font-weight: 700;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        color: var(--white-pure);
+        font-family: 'Playfair Display', serif;
+    }
+
+    .resume-item {
+        padding: 0 0 30px 20px;
+        margin-top: -2px;
+        border-left: 2px solid rgba(155, 93, 229, 0.3); /* Purple line */
+        position: relative;
+    }
+
+    .resume-item h4 {
+        line-height: 18px;
+        font-size: 18px;
+        font-weight: 700;
+        text-transform: uppercase;
+        font-family: 'Poppins', sans-serif;
+        color: var(--pink-soft);
+        margin-bottom: 10px;
+    }
+
+    .resume-item h5 {
+        font-size: 16px;
+        background: rgba(255, 133, 162, 0.1); /* Soft pink tint */
+        padding: 5px 15px;
+        display: inline-block;
+        font-weight: 600;
+        margin-bottom: 10px;
+        border-radius: 4px;
+        color: var(--white-pure);
+        border: 1px solid rgba(255, 133, 162, 0.2);
+    }
+
+    .resume-item ul {
+        padding-left: 20px;
+        color: #ced4da;
+    }
+
+    .resume-item ul li {
+        padding-bottom: 10px;
+    }
+
+    /* The Timeline Dot */
+    .resume-item::before {
+        content: "";
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        left: -9px;
+        top: 0;
+        background: var(--bg-dark);
+        border: 2px solid var(--purple-vibrant);
+        box-shadow: 0 0 10px var(--purple-vibrant);
+    }
+
+    /* Animation */
+    @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(30px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+</style>
+
+<script>
+    // Activate Resume link in sidebar
+    document.addEventListener("DOMContentLoaded", function() {
+        const navResume = document.getElementById('nav-resume');
+        if(navResume) navResume.classList.add('active');
+    });
+</script>
+{% endblock %}

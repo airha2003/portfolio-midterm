@@ -1,0 +1,132 @@
+{% extends 'portfolio/base.html' %}
+{% load static %}
+
+{% block content %}
+<section id="portfolio" class="py-5" style="background: var(--bg-dark); min-height: 100vh; color: var(--white-pure);">
+    <div class="container mt-5">
+
+        <div class="text-center mb-5">
+            <h2 style="font-family: 'Playfair Display'; font-size: 45px; color: var(--pink-soft);">My Creative Work</h2>
+            <div style="width: 80px; height: 3px; background: var(--purple-vibrant); margin: 10px auto;"></div>
+            <p class="mt-3" style="color: #ced4da; font-weight: 300; letter-spacing: 1px;">
+                A collection of network simulations, web applications, and community initiatives.
+            </p>
+        </div>
+
+        <div class="row g-4">
+            {% for project in projects %}
+            <div class="col-lg-4 col-md-6" style="animation: fadeInUp {{ forloop.counter|add:1 }}s ease;">
+                <div class="portfolio-card">
+                    <div class="portfolio-img-container">
+                        <img src="{{ project.image.url }}" class="img-fluid" alt="{{ project.title }}">
+
+                        <div class="portfolio-overlay">
+                            <div class="overlay-content">
+                                <h4 style="font-family: 'Playfair Display'; color: var(--pink-soft);">{{ project.title }}</h4>
+                                <p style="font-size: 14px; opacity: 0.9;">{{ project.description|truncatechars:80 }}</p>
+                                <div class="d-flex gap-2 justify-content-center">
+                                    <a href="{{ project.url }}" class="btn-view" target="_blank">
+                                        <i class="bi bi-link-45deg"></i> Live Demo
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12 text-center mt-5">
+                <p style="color: #ced4da; font-style: italic;">No projects added yet. Check back soon!</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<style>
+    /* Portfolio Card Styling */
+    .portfolio-card {
+        position: relative;
+        border-radius: 20px;
+        overflow: hidden;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .portfolio-img-container {
+        position: relative;
+        overflow: hidden;
+        aspect-ratio: 4/3; /* Keeps all project images the same size */
+    }
+
+    .portfolio-img-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.6s ease;
+    }
+
+    /* Hover Overlay */
+    .portfolio-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to bottom, rgba(4, 11, 20, 0.2), rgba(155, 93, 229, 0.9));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        opacity: 0;
+        transition: opacity 0.4s ease;
+        padding: 20px;
+    }
+
+    .portfolio-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(155, 93, 229, 0.3);
+        border-color: var(--purple-vibrant);
+    }
+
+    .portfolio-card:hover .portfolio-overlay {
+        opacity: 1;
+    }
+
+    .portfolio-card:hover .portfolio-img-container img {
+        transform: scale(1.1);
+    }
+
+    /* Button Styling */
+    .btn-view {
+        padding: 8px 20px;
+        background: var(--white-pure);
+        color: var(--bg-dark);
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 13px;
+        transition: 0.3s;
+    }
+
+    .btn-view:hover {
+        background: var(--pink-soft);
+        color: var(--white-pure);
+        transform: scale(1.05);
+    }
+
+    /* Entry Animation */
+    @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(30px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const navPort = document.getElementById('nav-portfolio');
+        if(navPort) navPort.classList.add('active');
+    });
+</script>
+{% endblock %}

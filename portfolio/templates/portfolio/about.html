@@ -1,0 +1,104 @@
+{% extends 'portfolio/base.html' %}
+{% load static %}
+
+{% block content %}
+<section id="about" class="py-5" style="background: var(--bg-dark); min-height: 100vh; color: var(--white-pure);">
+    <div class="container mt-5">
+
+        <div class="text-center mb-5" style="animation: fadeInDown 1s ease;">
+            <h2 style="font-family: 'Playfair Display'; font-size: 45px; color: var(--pink-soft);">About Her</h2>
+            <div style="width: 80px; height: 3px; background: var(--purple-vibrant); margin: 10px auto;"></div>
+        </div>
+
+        <div class="row align-items-center">
+            <div class="col-lg-4 mb-5 mb-lg-0 text-center" style="animation: fadeInLeft 1.2s ease;">
+                <div class="image-stack" style="position: relative; display: inline-block;">
+                    <img src="{% static 'portfolio/img/formal.jpg' %}" alt="Airha S. Obañana"
+                         class="img-fluid shadow-lg"
+                         style="border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); position: relative; z-index: 2; max-width: 320px;">
+                    <div style="position: absolute; top: 20px; left: 20px; width: 100%; height: 100%; border: 2px solid var(--purple-vibrant); border-radius: 20px; z-index: 1;"></div>
+                </div>
+            </div>
+
+            <div class="col-lg-8 ps-lg-5" style="animation: fadeInRight 1.2s ease;">
+                <h3 style="font-family: 'Playfair Display'; color: var(--white-pure); font-size: 32px; margin-bottom: 20px;">
+                    Aspiring Computer Scientist & <span style="color: var(--pink-soft);">Community Leader</span>
+                </h3>
+
+                <p style="font-size: 18px; line-height: 1.8; color: #ced4da; font-weight: 300;">
+                    She is a 22-year-old Computer Science student at Negros Oriental State University, Bayawan-Sta.Catalina Campus (NORSU-BSC).
+                    Beyond the screen, she served her community as an SK Councilor and as a Youth League Org. Treasurer,
+                    balancing the logical world of programming with the impactful world of public service.
+                </p>
+
+                <div class="row mt-4 g-4">
+                    <div class="col-md-6">
+                        <ul class="list-unstyled">
+                            <li class="mb-3"><i class="bi bi-chevron-right text-purple me-2"></i> <strong>Fullname:</strong> <span>Airha Pontemayor Advincula Bulfa Sienes Baldado Villaflores Ocaña Obañana</span></li>
+                            <li class="mb-3"><i class="bi bi-chevron-right text-purple me-2"></i> <strong>Birthday:</strong> <span>06-November-2003</span></li>
+                            <li class="mb-3"><i class="bi bi-chevron-right text-purple me-2"></i> <strong>Address:</strong> <span>Purok 3, Kabulacan Sta. Catalina,Negros Oriental, PH</span></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <ul class="list-unstyled">
+                            <li class="mb-3"><i class="bi bi-chevron-right text-purple me-2"></i> <strong>Age:</strong> <span>22</span></li>
+                            <li class="mb-3"><i class="bi bi-chevron-right text-purple me-2"></i> <strong>Framework:</strong> <span>Django / Bootstrap</span></li>
+                            <li class="mb-3"><i class="bi bi-chevron-right text-purple me-2"></i> <strong>Specialty:</strong> <span>Network Engineering</span></li>
+                            <li class="mb-3"><i class="bi bi-chevron-right text-purple me-2"></i> <strong>Degree:</strong> <span>BS in Computer Science(on-going)</span></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="mt-4">
+                    <span class="badge-custom">Web Development</span>
+                    <span class="badge-custom">Hybrid Topology</span>
+                    <span class="badge-custom">Public Service</span>
+                    <span class="badge-custom">Cisco Packet Tracer</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .text-purple { color: var(--purple-vibrant); }
+
+    .badge-custom {
+        display: inline-block;
+        padding: 8px 20px;
+        margin: 5px;
+        background: rgba(155, 93, 229, 0.1);
+        border: 1px solid var(--purple-vibrant);
+        color: var(--white-pure);
+        border-radius: 50px;
+        font-size: 14px;
+        transition: 0.3s;
+    }
+
+    .badge-custom:hover {
+        background: var(--purple-vibrant);
+        transform: translateY(-3px);
+    }
+
+    /* Animations */
+    @keyframes fadeInLeft {
+        from { opacity: 0; transform: translateX(-50px); }
+        to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes fadeInRight {
+        from { opacity: 0; transform: translateX(50px); }
+        to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes fadeInDown {
+        from { opacity: 0; transform: translateY(-30px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+</style>
+
+<script>
+    // Ensure the about link is active in sidebar
+    document.addEventListener("DOMContentLoaded", function() {
+        document.getElementById('nav-about').classList.add('active');
+    });
+</script>
+{% endblock %}
