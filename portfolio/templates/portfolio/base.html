@@ -13,23 +13,26 @@
     <style>
         :root {
             --bg-dark: #040b14;
-            /* New Aesthetic Palette */
             --pink-soft: #ff85a2;
             --purple-vibrant: #9b5de5;
             --white-pure: #ffffff;
+            --sidebar-width: 300px;
         }
 
         body {
             font-family: "Poppins", sans-serif;
             background-color: var(--bg-dark);
             overflow-x: hidden;
+            color: var(--white-pure);
         }
 
-        /* Sidebar Styling */
+        /* --- SIDEBAR STYLING --- */
         #header {
             position: fixed;
-            top: 0; left: 0; bottom: 0;
-            width: 300px;
+            top: 0;
+            left: calc(-1 * var(--sidebar-width)); /* Hidden by default */
+            bottom: 0;
+            width: var(--sidebar-width);
             background: linear-gradient(180deg, rgba(4, 11, 20, 0.98) 0%, rgba(20, 10, 35, 0.98) 100%);
             backdrop-filter: blur(15px);
             border-right: 1px solid rgba(155, 93, 229, 0.2);
@@ -37,155 +40,164 @@
             z-index: 9997;
             display: flex;
             flex-direction: column;
+            transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
         }
 
-        /* Profile Section Centered */
-        .profile {
-            padding: 20px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            margin-bottom: 20px;
-            text-align: center;
+        /* Reveal Sidebar */
+        #header.active {
+            left: 0;
+        }
+
+        /* --- MOBILE TOGGLE --- */
+        .mobile-nav-toggle {
+            position: fixed;
+            right: 20px;
+            top: 20px;
+            z-index: 9999;
+            border: 0;
+            font-size: 28px;
+            transition: all 0.4s;
+            outline: none !important;
+            background-color: var(--purple-vibrant);
+            color: #fff;
+            width: 45px;
+            height: 45px;
             display: flex;
-            flex-direction: column;
             align-items: center;
-        }
-
-        .profile img {
-            width: 100px;
-            height: 100px;
-            object-fit: cover;
-            border-radius: 50%;
-            border: 3px solid var(--purple-vibrant);
-            margin-bottom: 15px;
-            box-shadow: 0 0 15px rgba(155, 93, 229, 0.4);
-        }
-
-        .profile h1 {
-            font-weight: 600;
-            letter-spacing: 0.5px;
-            margin-bottom: 5px;
-            color: var(--white-pure);
-        }
-
-        .social-links {
-            margin-top: 10px;
-            display: flex;
             justify-content: center;
-            gap: 15px;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(155, 93, 229, 0.4);
+            visibility: hidden; /* Only show after entering site */
+            opacity: 0;
         }
 
-        .social-links a {
-            font-size: 18px;
-            transition: 0.3s;
-            color: #a8a9b4;
+        .mobile-nav-toggle.visible {
+            visibility: visible;
+            opacity: 1;
         }
 
-        .social-links a:hover { color: var(--pink-soft); transform: translateY(-3px); }
+        /* --- NAVIGATION --- */
+        .profile { text-align: center; padding: 20px 0; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .profile img {
+            width: 110px; height: 110px; border-radius: 50%;
+            border: 3px solid var(--purple-vibrant);
+            object-fit: cover; box-shadow: 0 0 20px rgba(155, 93, 229, 0.3);
+        }
 
-        /* Nav Menu with Unique Colors */
+        .nav-menu { margin-top: 30px; }
         .nav-menu ul { list-style: none; padding: 0; }
-
         .nav-menu a {
-            display: flex;
-            align-items: center;
-            color: #d1d1d1;
-            padding: 12px 15px;
-            text-decoration: none;
-            transition: 0.4s;
-            margin-bottom: 8px;
-            border-radius: 12px;
-            font-size: 15px;
-            border: 1px solid transparent;
+            display: flex; align-items: center; color: #ced4da;
+            padding: 12px 20px; text-decoration: none;
+            transition: 0.3s; border-radius: 10px; margin-bottom: 5px;
         }
+        .nav-menu a i { font-size: 20px; margin-right: 15px; }
 
-        .nav-menu a i { font-size: 20px; margin-right: 12px; }
+        /* Individual Nav Highlights */
+        .nav-home:hover, .nav-home.active { background: rgba(255, 133, 162, 0.15); color: var(--pink-soft); }
+        .nav-about:hover, .nav-about.active { background: rgba(155, 93, 229, 0.15); color: var(--purple-vibrant); }
 
-        /* Individual Shades (Pink, Purple, White combos) */
-        /* Home - Pink Glow */
-        .nav-home:hover, .nav-home.active {
-            background: rgba(255, 133, 162, 0.15);
-            color: var(--pink-soft);
-            border-color: var(--pink-soft);
-            box-shadow: 0 0 10px rgba(255, 133, 162, 0.2);
-        }
-
-        /* About - Purple Glow */
-        .nav-about:hover, .nav-about.active {
-            background: rgba(155, 93, 229, 0.15);
-            color: var(--purple-vibrant);
-            border-color: var(--purple-vibrant);
-            box-shadow: 0 0 10px rgba(155, 93, 229, 0.2);
-        }
-
-        /* Skills - White/Pink Glow */
-        .nav-skills:hover, .nav-skills.active {
-            background: rgba(255, 255, 255, 0.1);
-            color: var(--white-pure);
-            border-color: var(--white-pure);
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
-        }
-
-        /* Resume - Soft Magenta Mix */
-        .nav-resume:hover, .nav-resume.active {
-            background: rgba(255, 133, 162, 0.1);
-            color: #ffb3c1;
-            border-color: #ffb3c1;
-        }
-
-        /* Portfolio - Deep Purple Glow */
-        .nav-portfolio:hover, .nav-portfolio.active {
-            background: rgba(155, 93, 229, 0.2);
-            color: #c8b6ff;
-            border-color: #c8b6ff;
-        }
-
+        /* --- MAIN AREA --- */
         main {
-            margin-left: 300px;
+            transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
             min-height: 100vh;
-            background: #fff;
-            transition: 0.5s;
         }
 
-        @media (max-width: 992px) {
-            #header { left: -300px; }
-            main { margin-left: 0; }
+        /* Desktop Push Effect */
+        @media (min-width: 992px) {
+            main.pushed {
+                margin-left: var(--sidebar-width);
+            }
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 991px) {
+            #header { width: 260px; }
+            /* Overlay effect when menu is open on mobile */
+            .mobile-nav-active { overflow: hidden; }
+            .mobile-nav-active #header { left: 0; }
+            .mobile-nav-active .mobile-nav-toggle { background-color: var(--pink-soft); }
         }
     </style>
 </head>
 <body>
 
+    <button type="button" class="mobile-nav-toggle" id="nav-toggle">
+        <i class="bi bi-list"></i>
+    </button>
+
     <header id="header">
         <div class="profile">
             <img src="{% static 'portfolio/img/PROFILE2.png' %}" alt="Airha Profile">
-            <h1 class="fs-5">Airha S. Obañana</h1>
+            <h1 class="fs-5 mt-3">Airha S. Obañana</h1>
         </div>
 
-        <nav class="nav-menu mt-2">
+        <nav class="nav-menu">
             <ul>
-                <li><a href="{% url 'home' %}" class="nav-home {% if request.resolver_match.url_name == 'home' %}active{% endif %}">
-                    <i class="bi bi-house-door"></i> <span>Home</span></a>
-                </li>
-                <li><a href="{% url 'about' %}" class="nav-about {% if request.resolver_match.url_name == 'about' %}active{% endif %}">
-                    <i class="bi bi-person"></i> <span>About</span></a>
-                </li>
-                <li><a href="{% url 'skills' %}" class="nav-skills {% if request.resolver_match.url_name == 'skills' %}active{% endif %}">
-                    <i class="bi bi-code-slash"></i> <span>Skills</span></a>
-                </li>
-                <li><a href="{% url 'resume' %}" class="nav-resume {% if request.resolver_match.url_name == 'resume' %}active{% endif %}">
-                    <i class="bi bi-file-earmark-text"></i> <span>Resume</span></a>
-                </li>
-                <li><a href="{% url 'portfolio' %}" class="nav-portfolio {% if request.resolver_match.url_name == 'portfolio' %}active{% endif %}">
-                    <i class="bi bi-journal-richtext"></i> <span>Portfolio</span></a>
-                </li>
+                <li><a href="{% url 'home' %}" class="nav-home active"><i class="bi bi-house-door"></i> <span>Home</span></a></li>
+                <li><a href="{% url 'about' %}" class="nav-about"><i class="bi bi-person"></i> <span>About</span></a></li>
+                <li><a href="{% url 'skills' %}" class="nav-skills"><i class="bi bi-code-slash"></i> <span>Skills</span></a></li>
+                <li><a href="{% url 'resume' %}" class="nav-resume"><i class="bi bi-file-earmark-text"></i> <span>Resume</span></a></li>
+                <li><a href="{% url 'portfolio' %}" class="nav-portfolio"><i class="bi bi-journal-richtext"></i> <span>Portfolio</span></a></li>
             </ul>
         </nav>
     </header>
 
-    <main>
-        {% block content %}
-        {% endblock %}
+    <main id="main-content">
+        {% block content %}{% endblock %}
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        /**
+         * Sidebar Toggle Logic
+         */
+        const navToggle = document.getElementById('nav-toggle');
+        const header = document.getElementById('header');
+        const main = document.getElementById('main-content');
+        const body = document.querySelector('body');
+
+        function toggleMenu() {
+            body.classList.toggle('mobile-nav-active');
+            header.classList.toggle('active');
+            main.classList.toggle('pushed');
+
+            // Switch icons
+            const icon = navToggle.querySelector('i');
+            icon.classList.toggle('bi-list');
+            icon.classList.toggle('bi-x');
+        }
+
+        navToggle.addEventListener('click', toggleMenu);
+
+        /**
+         * Global Enter Site Function
+         * This can be called from your home page 'Explore Now' button
+         */
+        window.enterSite = function() {
+            const overlay = document.getElementById('welcome-overlay');
+            const hero = document.getElementById('hero');
+
+            if(overlay) overlay.style.opacity = '0';
+
+            setTimeout(() => {
+                if(overlay) overlay.style.display = 'none';
+                if(hero) {
+                    hero.style.visibility = 'visible';
+                    hero.style.opacity = '1';
+                }
+
+                // Show toggle button and slide sidebar
+                navToggle.classList.add('visible');
+
+                // Only auto-open sidebar on Desktop (wider than 991px)
+                if (window.innerWidth > 991) {
+                    header.classList.add('active');
+                    main.classList.add('pushed');
+                }
+            }, 800);
+        };
+    </script>
 </body>
 </html>

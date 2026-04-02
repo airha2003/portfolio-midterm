@@ -1,5 +1,9 @@
-from django.shortcuts import render
 from .models import Portfolio
+from django.shortcuts import render
+
+
+
+
 
 def home(request):
     # This remains your landing page
